@@ -1,6 +1,21 @@
 import csv
+import os
+from sys import argv
+import random
 
-filename = "cards/blah.csv" # your CSV or TXT file
+filename = argv[1] # your CSV or TXT file
+
+question_range = 10
+
+os.system('clear')
+
+try:
+    question_range = int(argv[2])
+    print("Question range is", question_range)
+except:
+    print("Question range is", question_range)
+
+input()
 
 with open(filename, "r") as file:
     reader = csv.DictReader(file)
@@ -10,7 +25,19 @@ with open(filename, "r") as file:
 a_side = reader.fieldnames[0]
 b_side = reader.fieldnames[1]
 
-# print(len(cards)) gets number of cards
-# print(len(reader.fieldnames)) gets number of columns, which flashcards should be 2
-# print(cards[1][a_side]) gets the first side of the card
-# print(cards[1][b_side]) gets the second side of the card
+for x in range(question_range):
+    os.system("clear")
+    number_for_question = random.randrange(len(cards))
+    if random.randrange(2) == 0:
+        print(f"{a_side}: {cards[number_for_question][a_side]}")
+        input(f"{b_side}: ")
+        print(f"Answer: {cards[number_for_question][b_side]}")
+        input()
+
+    else:
+        print(f"{b_side}: {cards[number_for_question][b_side]}")
+        input(f"{a_side}: ")
+        print(f"Answer: {cards[number_for_question][a_side]}")
+        input()
+
+os.system("clear")
